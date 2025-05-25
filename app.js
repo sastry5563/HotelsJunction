@@ -1462,13 +1462,51 @@ document.getElementById("Alcohol").addEventListener('click',()=>{
 
 })
 
-document.getElementById("Rating").addEventListener('click',()=>{
-    
-    const result = restaurants.filter((obj)=>obj.rating>4.5);
-    document.getElementById('root').replaceChildren();
-    getrestaurant(result);
+// document.getElementById("Rating").addEventListener('click',()=>{
+//     document.getElementById("rating-popup").classList.remove("hidden");
+// })
+// document.getElementById('closeFilter').addEventListener('click',()=>{
+//      document.getElementById("rating-popup").classList.add("hidden");
+// })
+//  document.getElementById('applyFilter').addEventListener('click',()=>{
+   
+//     const element = document.querySelector('input[name="ratingOption"]:checked');
+//     const answer = parseInt(element.value);
+//      const result = restaurants.filter((obj)=>{
+//         return obj.rating==answer;
+//     });
+     
+//     document.getElementById('root').replaceChildren();
+//     document.getElementById("rating-popup").classList.add("hidden");
+//     getrestaurant(result);
 
+// })
+document.getElementById('Rating').addEventListener('click',()=>{
+    document.getElementById('rating-popup').classList.remove('hidden');
 })
+document.getElementById('closerating').addEventListener('click',()=> {
+    document.getElementById("rating-popup").classList.add("hidden");
+});
+
+
+document.getElementById('applyrating').addEventListener('click',()=> {
+    const element = document.querySelector('input[name="ratingOption"]:checked');
+    const answer = parseInt(element.value);
+    const result = restaurants.filter((obj) => {
+        return obj.rating == answer;
+    });
+
+    document.getElementById('root').replaceChildren();
+    document.getElementById("rating-popup").classList.add("hidden");
+    getrestaurant(result);
+});
+
+
+
+
+
+
+
 // restaurants opened now
 document.getElementById("Open").addEventListener('click',()=>{
     const currentTime = new Date();

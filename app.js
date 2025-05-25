@@ -1556,8 +1556,58 @@ document.getElementById('applyFilter').addEventListener('click',()=>{
 })
 
 
+// search bar
+const searchBar = document.getElementById('searchBar');
+const suggestions = document.getElementById('suggestions');
 
+// helper to show cards using your existing getrestaurant
+function showResults(list) {
+  document.getElementById('root').replaceChildren();
+  getrestaurant(list);
+}
 
-        
-    
-    
+// live search handler
+searchBar.addEventListener('input', () => {
+  const q = searchBar.value.toLowerCase().trim();
+
+  // if empty, show all and hide suggestions
+  if (!q) {
+    suggestions.style.display = 'none';
+    showResults(restaurants);
+    return;
+  }
+
+  // filter by name or location
+  const matches = restaurants.filter(r =>
+    r.name.toLowerCase().includes(q) ||
+    r.location.toLowerCase().includes(q)
+  );
+
+  // render suggestions
+  suggestions.innerHTML = '';
+  if (matches.length) {
+    matches.slice(0, 5).forEach(r => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${r.name}</strong><br><small>${r.location}</small>`;
+      li.addEventListener('click', () => {
+        searchBar.value = r.name;
+        suggestions.style.display = 'none';
+        showResults([r]);
+      });
+      suggestions.appendChild(li);
+    });
+    suggestions.style.display = 'block';
+  } else {
+    suggestions.style.display = 'none';
+  }
+
+  // always update cards live as you type
+  showResults(matches);
+});
+
+// hide suggestions if user clicks outside
+document.addEventListener('click', e => {
+  if (!searchBar.contains(e.target) && !suggestions.contains(e.target)) {
+    suggestions.style.display = 'none';
+  }
+});

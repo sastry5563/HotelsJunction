@@ -1,47 +1,22 @@
-<!-- Data -->
-1: Restaurant Image
-2: Restaurant Name
-3: Rating
-4: Food_type
-5: Price_for_two
-6: Location
-7: Distance_from_Customer_house
-8: Offers
-9: Alchol_serves
-10: Restaurant_open_time
-11: Restaurant_close_time
+# Hotel Explorer 🏨  
 
+## Overview  
+Hotel Explorer is a dynamic frontend project designed to help users find the best hotels based on various filters such as price, distance, available offers, and amenities like alcohol availability. Users can efficiently sort hotels and apply multiple filters to refine their search experience.
 
-<!-- 100 dummy create karo -->
+## Features  
+🔹 **Search & Filter Options**  
+- Filter by price (lowest to highest)  
+- Sort by distance (nearest to farthest)  
+- Sort by offers & discounts  
+- Filter hotels based on alcohol availability  
+- Apply multiple filters simultaneously  
 
+🔹 **Interactive UI**  
+- User-friendly hotel cards displaying key details  
+- Real-time filter application  
+- Responsive design for mobile and desktop  
 
-
-replaceChildren
-
-
-
-
-
-
-<!-- Restaurant Info -->
-1: IMG
-2: Name
-3: Rating
-4: food_type
-5: price_for_two
-6: Location
-7: Distance
-8: Offers
-9: Alchol
-10: Restaurant_opening_time
-11: Restaurant_closing_time
-
-const obj = {
-    img: "link",
-    Name:"Sohan"
-    food_type: "Indian",
-    Rating: 4,
-}
-
-
-const restaurant = [100objects];
+## Installation  
+Clone the repository:  
+```bash
+git clone https://github.com/your-username/hotel-explorer.git

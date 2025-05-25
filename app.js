@@ -1302,6 +1302,17 @@ const restaurants = [
 ]
 
 
+function formatTime(hour) {
+    hour = parseInt(hour); // convert to number
+    if (isNaN(hour)) return ""; // handle invalid values
+
+    let period = hour < 12 || hour === 24 ? "AM" : "PM";
+    let formattedHour = hour % 12;
+    if (formattedHour === 0) formattedHour = 12;
+
+    return formattedHour + period;
+}
+
 function getrestaurant(restaurants){
 
     const root = document.getElementById('root');
@@ -1391,10 +1402,33 @@ function getrestaurant(restaurants){
     card_location.appendChild(location);
     card_location.appendChild(distance);
     
-    //offers and closing time 
-    // const card_time_offers=document.createElement('div');
+    //offers and closing time // css same for card location 
+    //opens time
+     const card_time_offers=document.createElement('div');
+     const card_open_time=document.createElement('div');
+     card_open_time.classList.add('card-location');
+    const timelabel=document.createElement('span');
+    timelabel.textContent="Opens from : ";
+    const time=document.createElement('span');
+    time.textContent=formatTime(restaurant.restaurant_open_time);
 
-    
+    card_open_time.appendChild(timelabel);
+    card_open_time.appendChild(time);
+
+    //closing time 
+    const card_close_time=document.createElement('div');
+     card_close_time.classList.add('card-location');
+    const timecloselabel=document.createElement('span');
+    timecloselabel.textContent="Closes At: ";
+    const closetime=document.createElement('span');
+    closetime.textContent=formatTime(restaurant.restaurant_close_time);
+
+    card_close_time.appendChild(timecloselabel);
+    card_close_time.appendChild(closetime);
+
+
+    card_time_offers.appendChild(card_open_time);
+    card_time_offers.appendChild(card_close_time);
 
 
 
@@ -1404,7 +1438,7 @@ function getrestaurant(restaurants){
     Card_content.appendChild(Card_header);
     Card_content.appendChild(Card_footer);
     Card_content.appendChild(card_location);
-
+    Card_content.appendChild(card_time_offers);
 
     card.appendChild(image);
     card.appendChild(Card_content);
@@ -1435,6 +1469,22 @@ document.getElementById("Rating").addEventListener('click',()=>{
     getrestaurant(result);
 
 })
+// restaurants opened now
+document.getElementById("Open").addEventListener('click',()=>{
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+    const hours12 = currentHour % 12 || 12;
+    const result = restaurants.filter((obj)=>{
+        return obj.restaurant_open_time<=hours12 && hours12<=obj.restaurant_close_time;
+    });
+    document.getElementById('root').replaceChildren();
+    getrestaurant(result);
+
+})
+
+
+
+
 
 document.getElementById('Filters').addEventListener('click',()=>{
     document.getElementById("filterPopup").classList.remove("hidden");

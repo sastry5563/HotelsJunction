@@ -1335,8 +1335,15 @@ function getrestaurant(restaurants){
 
 
     // create Image
+        const c_image=document.createElement('div');
+        c_image.classList.add('card-img-container');
         const image = document.createElement("img");
         image.src = `Images/${restaurant.image}.jpeg`;
+        c_image.appendChild(image);
+        const c_offer=document.createElement('div');
+        c_offer.classList.add('offer-label');
+        c_offer.innerText=formatOffer(restaurant.offers);
+        c_image.appendChild(c_offer);
 
     // card-content
        const Card_content = document.createElement('div');
@@ -1440,7 +1447,7 @@ function getrestaurant(restaurants){
     Card_content.appendChild(card_location);
     Card_content.appendChild(card_time_offers);
 
-    card.appendChild(image);
+    card.appendChild(c_image);
     card.appendChild(Card_content);
 
     root.appendChild(card);
@@ -1611,3 +1618,11 @@ document.addEventListener('click', e => {
     suggestions.style.display = 'none';
   }
 });
+// for offers function
+function formatOffer(offer) {
+  // decide if offer is fraction (0–1) or whole percent
+  let pct = offer <= 1 ? offer * 100 : offer;
+  // round to nearest whole number
+  pct = Math.round(pct);
+  return `Flat ${pct}% OFF`;
+}
